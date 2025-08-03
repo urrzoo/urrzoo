@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ucapan Ulang Tahun</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #ffc0cb;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #container {
+      border: 10px solid #ff69b4;
+      margin: 30px auto;
+      padding: 30px;
+      max-width: 700px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background-color: #fff0f5;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      position: relative;
+      z-index: 1;
+    }
+
+    #message-box {
+      font-size: 20px;
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    .line {
+      display: block;
+    }
+
+    
+    .love {
+      position: fixed;
+      top: -50px;
+      font-size: 28px;
+      animation: fall 6s linear infinite;
+      z-index: 0;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <script>
+    for (let i = 0; i < 30; i++) {
+      const love = document.createElement("div");
+      love.classList.add("love");
+      love.style.left = Math.random() * 100 + "vw";
+      love.style.animationDelay = Math.random() * 5 + "s";
+      love.style.color = Math.random() > 0.5 ? "red" : "deeppink";
+      love.textContent = Math.random() > 0.5 ? "❤️" : "🌸";
+      document.body.appendChild(love);
+    }
+  </script>
+
+  
+  <div id="container">
+    <div id="message-box">
+      <span id="text"></span>
+    </div>
+  </div>
+
+  <script>
+    const lines = [
+      "Hello 💖",
+      "",
+      "hari ini, adalah hari dimana seseorang yang begitu baik dilahirkan ke dunia..",
+      "happy birthday for u cintakuu...",
+      "kamu adalah orang yang sangat istimewa.",
+      "terima kasih telah menambah keceriaan di dunia ini..",
+      "terima kasih atas ketulusan yang telah kamu tunjukkan kepada dunia,",
+      "walau hatimu sedang rapuh..",
+      "semoga dengan bertambahnya usia yang kamu miliki ini",
+      "menjadi pertanda bahwa Tuhan memberkahi langkahmu..",
+      "semoga kehidupanmu dipenuhi dengan kebahagiaan..",
+      "lupakanlah kesalahan dan penyesalanmu,",
+      "dan mulailah dengan perjuangan dan semangat yang baru..",
+      "serta harapan yang lebih besar lagi..",
+      "once again happy 16th b'day cantikkk 💗💗"
+    ];
+
+    let currentLine = 0;
+    let currentChar = 0;
+    let currentSpan = document.createElement("span");
+    currentSpan.classList.add("line");
+    document.getElementById("text").appendChild(currentSpan);
+
+    function typeLine() {
+      const line = lines[currentLine];
+      if (currentChar < line.length) {
+        currentSpan.innerHTML += line.charAt(currentChar);
+        currentChar++;
+        document.getElementById("container").scrollTop = document.getElementById("container").scrollHeight;
+        setTimeout(typeLine, 50);
+      } else {
+        currentLine++;
+        if (currentLine < lines.length) {
+          currentChar = 0;
+          currentSpan = document.createElement("span");
+          currentSpan.classList.add("line");
+          document.getElementById("text").appendChild(document.createElement("br"));
+          document.getElementById("text").appendChild(currentSpan);
+          setTimeout(typeLine, 300);
+        }
+      }
+    }
+
+    window.onload = typeLine;
+  </script>
+</body>
+</html>
